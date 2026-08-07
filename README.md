@@ -1,2 +1,2 @@
-- Added Assignment 1 notebook under folder Assignment_1
+- Added Assignment 1 notebook under folder Assignment1
 - Assignment 2 is currently ongoing.
