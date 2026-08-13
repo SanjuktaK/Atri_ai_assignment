@@ -1,0 +1,35 @@
+{
+  "labels": [
+    "car",
+    "person",
+    "person",
+    "car",
+    "car",
+    "umbrella",
+    "car",
+    "car",
+    "traffic light",
+    "traffic light",
+    "traffic light"
+  ],
+  "scores": [
+    0.966,
+    0.959,
+    0.956,
+    0.955,
+    0.914,
+    0.738,
+    0.69,
+    0.6,
+    0.563,
+    0.448,
+    0.409
+  ],
+  "params_m": 19.05,
+  "size_mb": 76.22,
+  "device": "cpu",
+  "iters": 100,
+  "latency_ms": 533.01,
+  "std_ms": 251.86,
+  "fps": 1.88
+}
