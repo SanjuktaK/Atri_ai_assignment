@@ -32,8 +32,6 @@ runs/
 # Datasets - re-downloadable, see README
 Assignment2/data/
 
-# Editor / tooling
-.vscode/
 *.mp4
 !Assignment2/output/demo_clip.mp4
 
