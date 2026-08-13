@@ -81,11 +81,11 @@ startup time, each over 100 iterations after 10 warm-up passes. The three requir
 (FPS bar, latency bar, accuracy vs model size scatter) are in the wandb report.
 
 ### Q7 - Analysis & Insights
-wandb report
+[wandb report](https://api.wandb.ai/links/trishab/pnk3mw1e)
 
 Seven observations and the production recommendation, based on the Q6 panels. Headline:
-FP16 is the variant to ship, at 7.51 ms and 133.24 FPS against the baseline's 14.37 ms and
-69.57 FPS, with mAP unchanged.
+FP16 is the variant to ship, at 7.62 ms and 131.31 FPS against the baseline's 14.19 ms and
+70.48 FPS, with mAP unchanged.
 
 ### Q8 - Loss Function Comparison
 [`Assignment2.ipynb`](../Assignment2.ipynb)
@@ -93,7 +93,7 @@ FP16 is the variant to ship, at 7.51 ms and 133.24 FPS against the baseline's 14
 Ultralytics uses `BCEWithLogitsLoss` rather than softmax cross-entropy, so this compares
 BCE against focal-BCE. Per-epoch mAP curves and a final-mAP bar chart for both.
 
-BCE 0.3755 against focal 0.3668. BCE leads at every epoch, not only at the end.
+BCE 0.3702 against focal 0.3667. BCE leads at every epoch, not only at the end.
 
 ### Q9 - Hybrid Architecture
 [`Assignment2.ipynb`](../Assignment2.ipynb) · architecture in `yolo11n-aifi.yaml`
@@ -103,12 +103,12 @@ and a control trained 10 epochs on identical data, so architecture is the only d
 
 | | Params | Latency | FPS | mAP@0.5:0.95 |
 |---|---|---|---|---|
-| Control (YOLO11n) | 2.62 M | 19.11 ms | 52.3 | 0.3721 |
-| AIFI hybrid | 3.16 M (+20.6%) | 20.19 ms (+5.7%) | 49.5 | 0.2669 |
+| Control (YOLO11n) | 2.62 M | 14.59 ms | 68.5 | 0.3717 |
+| AIFI hybrid | 3.16 M (+20.6%) | 15.38 ms (+5.4%) | 65.0 | 0.2691 |
 
 Latency scales far more slowly than parameters. Accuracy does not hold: AIFI is the one
 block that cannot inherit pretrained weights, and at 3 epochs the gap was 16 points
-against 10.5 here, so the deficit is convergence rather than architecture.
+against 10.3 here, so the deficit is convergence rather than architecture.
 
 ### Q10 - Additional Pruning Technique
 [`Assignment2.ipynb`](../Assignment2.ipynb)
@@ -118,6 +118,25 @@ the Q5 lottery-ticket rounds. Only one variable changes: each round keeps the pr
 round's trained weights instead of rewinding to the originals, so any difference between
 the two accuracy-vs-sparsity curves is attributable to rewinding alone. Both curves are
 plotted together in the notebook.
+
+| Sparsity | Lottery ticket | Magnitude, no rewind | Gap |
+|---|---|---|---|
+| 0% (unpruned) | 0.3983 | 0.3983 | - |
+| 20% | 0.3750 | 0.3750 | 0 |
+| 50% | 0.3271 | 0.3569 | +3.0 pts |
+| 70% | 0.1828 | 0.3107 | +12.8 pts |
+
+**Magnitude pruning with fine-tuning is the better technique here.** The two are identical
+at 20%, as they must be, since round one has nothing to rewind to except the pretrained
+weights. From 50% they diverge, and at 70% the lottery-ticket model retains 46% of baseline
+accuracy against fine-tuning's 78%.
+
+The reason is the retraining budget. Rewinding discards everything learned on the premise
+that the sparse subnetwork can be retrained to full accuracy, which assumes the original
+paper's full training schedule. Three epochs on 4000 images is nowhere near that, so the
+method that keeps its head start wins. The claim is therefore that magnitude pruning is
+better *under a constrained retraining budget*, which is the realistic condition for edge
+work, not that the lottery ticket hypothesis fails in general.
 
 ### Q11 - Repository & Code Quality
 [Top-level README](../../README.md)
@@ -133,10 +152,10 @@ Two of five models tested for low-light indoor deployment: YOLO11n (the Q3 winne
 RT-DETR-R18 (best small-object recall in Q1). Evaluated on the same 1000-image held-out
 split darkened to 0.25x gain.
 
-| | mAP normal | mAP dark | drop |
-|---|---|---|---|
-| YOLO11n | 0.3982 | 0.3691 | 7.31% |
-| RT-DETR-R18 | 0.4751 | 0.4378 | 7.84% |
+| | mAP normal | mAP dark | drop | latency | FPS |
+|---|---|---|---|---|---|
+| YOLO11n | 0.3983 | 0.3693 | 7.29% | 14.59 ms | 68.5 |
+| RT-DETR-R18 | 0.4750 | 0.4377 | 7.85% | 21.29 ms | 47.0 |
 
 Both degrade by almost the same fraction, so RT-DETR is not more robust to low light, it
 is simply more accurate throughout. That refutes the hypothesis the model was selected on.
