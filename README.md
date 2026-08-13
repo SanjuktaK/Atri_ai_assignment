@@ -20,6 +20,7 @@ wandb project: [wandb](https://api.wandb.ai/links/trishab/pnk3mw1e)
 | Q5 to Q12 (optimization, pruning, hybrid, transfer task) | `Assignment2/Assignment2.ipynb` (Colab) |
 | Q2 literature review | `Assignment2/report/Q2_literature_review.md` |
 | Q3 model selection | `Assignment2/report/Q3_model_selection_criteria.md` |
+| Q6 charts and Q7 analysis | wandb report linked above |
 | Q1 annotated outputs, one per model | `Assignment2/output/q1_<model>.jpg`, side by side in `q1_all_models.jpg` |
 | Q4 demo clip | `Assignment2/output/demo_clip.mp4` and `demo_clip.gif` |
 | Q4 demo script | `Assignment2/run_demo.py` |
