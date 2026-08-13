@@ -68,7 +68,7 @@ mkdir -p "$D" && curl -L -o "$D/yolo_nas_s_coco.pth" \
 The sample image with output from 5 different models are present in the report Assignment2/model_preview.ipynb
 With all the output images from every model stored at output/q1_'modelname'.jpg
 
-
+# to get the demo video
 curl -L -o data/demo.mp4 \
   https://github.com/intel-iot-devkit/sample-videos/raw/master/person-bicycle-car-detection.mp4
 
