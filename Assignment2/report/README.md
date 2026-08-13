@@ -3,15 +3,12 @@
 Index to the answers. Each question links to where the work and the numbers live.
 
 Repository: https://github.com/SanjuktaK/Atri_ai_assignment
-wandb project: linked from the [top-level README](../../README.md)
+wandb project: [wandb](https://wandb.ai/trishab/edge-vision-yolo11n/workspace?nw=nwusertrishab)
 
 Selected model carried into Q4 to Q8: **YOLO11n**.
 
 Measurement environments differ by section and are not interchangeable. Q1, Q3 and Q4 ran
-locally on Apple Silicon (CPU/MPS). Q5 to Q12 ran on a Colab A100. Within the Colab work,
-Q5 and Q6 ran with cuDNN enabled; from Q8 onwards cuDNN was disabled to work around a
-version conflict in that environment, which costs roughly a third of the throughput. Any
-latency comparison must therefore stay inside one section.
+locally on Apple Silicon (CPU/MPS). Q5 to Q12 ran on a Colab A100. 
 
 ---
 
