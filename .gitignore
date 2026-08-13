@@ -38,3 +38,6 @@ Assignment2/data/
 # Local backups, not part of the submission
 *_prerefactor.ipynb
 *_raw.ipynb
+
+# Superseded by Assignment2.ipynb
+Assignment2/model_Retraining.ipynb
