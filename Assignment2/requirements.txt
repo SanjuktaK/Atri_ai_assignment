@@ -1,0 +1,14 @@
+torch
+torchvision
+ultralytics          
+transformers         
+effdet               
+timm                 
+pycocotools          
+onnx
+onnxruntime
+wandb
+opencv-python
+matplotlib
+pandas
+ipykernel

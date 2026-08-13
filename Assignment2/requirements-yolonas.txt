@@ -1,0 +1,6 @@
+super-gradients==3.7.1
+torch==2.1.2
+torchvision==0.16.2
+numpy==1.23.0
+setuptools<70
+ipykernel

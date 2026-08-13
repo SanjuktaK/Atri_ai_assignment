@@ -1,1 +1,42 @@
-./Assignment2
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Model weights (downloaded by setup.sh / scripts - never commit)
+*.pt
+*.pth
+*.onnx
+*.engine
+*.tflite
+weights/
+
+# Run artifacts
+wandb/
+runs/
+
+# Videos are large: ignore by default, but the demo clip is a deliverable.
+*.mp4
+!Assignment2/report/demo.mp4
+
+# NOTE: Assignment2/outputs/ is deliberately NOT ignored - the annotated Q1
+# images are a required deliverable and the report embeds them.
+
+# OS
+.DS_Store
+# Environments
+.venv-nas/
+
+# Datasets - re-downloadable, see README
+Assignment2/data/
+
+# Editor / tooling
+.vscode/
+*.mp4
+!Assignment2/output/demo_clip.mp4
+
+# Local backups, not part of the submission
+*_prerefactor.ipynb
+*_raw.ipynb
